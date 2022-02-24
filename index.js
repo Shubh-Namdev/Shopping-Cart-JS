@@ -3,7 +3,7 @@ const items = [
 ]
 
 
-updateItem = (e) => {
+updateItem = () => {
     const itemElem = document.getElementById('item');
     const priceElem = document.getElementById('price');
 
@@ -22,10 +22,11 @@ updateItem = (e) => {
     
             itemElem.value = '';
             priceElem.value = '';
-        }
-        
+        }     
     }
 }
+
+
 
 generateList = () => {
     const tableElem = document.getElementById('table');
@@ -52,24 +53,21 @@ generateList = () => {
         tableElem.appendChild(tableBody);
         serialNumber++;
     })
-    const grandTotalRow=document.createElement('tr');
-    const grandTotalElem=document.createElement('th')
-    const grandTotal=items.reduce((prevValue,currentValue) => {
-        return parseInt(prevValue)+parseInt(currentValue.price);
+    
+    const grandTotalElem=document.getElementById('grandtotal');
+    const grandTotal=items.reduce((preValue, currentValue) => {
+        return parseInt(preValue)+parseInt(currentValue.price);
     },0)
     grandTotalElem.textContent=grandTotal;
-
-    grandTotalRow.appendChild(grandTotalElem);
-    tableBody.appendChild(grandTotalRow);
-
 }
+
+
 
 function insertItem() {
     const addItem = document.getElementById('add-item');
     addItem.addEventListener('click', () => {
         updateItem();
         generateList();
-
     });
 }
 
